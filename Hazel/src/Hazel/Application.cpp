@@ -1,5 +1,6 @@
+#include "hzpch.h"
 #include "Application.h"
-#include <iostream>
+
 
 namespace Hazel {
 	Application::Application()
