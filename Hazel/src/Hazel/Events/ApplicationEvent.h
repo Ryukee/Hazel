@@ -27,10 +27,10 @@ namespace Hazel {
 		unsigned int m_Width, m_Height;
 	};
 
-	class HAZEL_API WindowCloseEvnet : public Event
+	class HAZEL_API WindowCloseEvent : public Event
 	{
 	public:
-		WindowCloseEvnet() = default;
+		WindowCloseEvent() = default;
 
 		EVENT_CLASS_TYPE(WindowClose);
 		EVENT_CLASS_CATEGORY(EventCategoryApplication);
