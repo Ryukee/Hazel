@@ -1,6 +1,8 @@
 #include "hzpch.h"
 #include "Application.h"
 
+#include "Events/ApplicationEvent.h"
+
 #include <GLFW/glfw3.h>
 
 namespace Hazel {
@@ -17,6 +19,12 @@ namespace Hazel {
 	void Application::Run() {
 
 		HZ_CORE_INFO("run.");
+		WindowResizeEvent e(1280, 720);
+		if (e.IsInCategory(EventCategoryApplication))
+		{
+			HZ_TRACE(e.ToString());
+		}
+
 		while (m_Running)
 		{
 			glClearColor(0.2, 0.5, 0.4, 1);
