@@ -64,11 +64,10 @@ project "Hazel"
 			"HZ_BUILD_DLL"
 		}
 
-		-- postbuildcommands
-		-- {
-		-- 	("{COPYFILE} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/%{cfg.buildtarget.name}\"")
-		-- 
-		-- }
+		postbuildcommands
+		{
+			("{COPYFILE} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/%{cfg.buildtarget.name}\"")
+		}
 
 	filter "configurations:Debug"
 		defines "HZ_DEBUG"
