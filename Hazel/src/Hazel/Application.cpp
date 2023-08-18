@@ -1,4 +1,5 @@
 #include "hzpch.h"
+#include "Core.h"
 #include "Application.h"
 
 #include "Events/ApplicationEvent.h"
@@ -6,8 +7,6 @@
 #include <glad/glad.h>
 
 namespace Hazel {
-
-#define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
 	Application* Application::s_Instance = nullptr;
 
@@ -17,7 +16,7 @@ namespace Hazel {
 		s_Instance = this;
 
 		m_Window = std::unique_ptr<Window>(Window::Create());
-		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
+		m_Window->SetEventCallback(HZ_BIND_EVENT_FN(Application::OnEvent));
 	}
 
 	Application::~Application() {}
@@ -56,12 +55,15 @@ namespace Hazel {
 	{
 		HZ_CORE_TRACE("{0}", e.ToString());
 		EventDispatcher dispatcher(e);
-		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
+		dispatcher.Dispatch<WindowCloseEvent>(HZ_BIND_EVENT_FN(Application::OnWindowClose));
+		// ?????
 		if (e.Handled)
 			return;
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
 		{
 			(*--it)->OnEvent(e);
+			if (e.Handled)
+				break;
 		}
 	}
 
